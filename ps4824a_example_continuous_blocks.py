@@ -3,7 +3,9 @@ from ps4824a_wrapper_blockmode_utils import Picoscope
 import matplotlib.pyplot as plt
 import time
 
-my_picoscope = Picoscope(0, verbose=True)
+#instantiate a device with its specific serial number:
+my_picoscope = Picoscope(0, serial='IW968/0159', verbose=True)
+# my_picoscope = Picoscope(0, serial=None, verbose=True)
 
 
 
