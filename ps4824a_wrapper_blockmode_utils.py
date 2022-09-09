@@ -2,6 +2,9 @@
 # see also
 # https://www.picotech.com/download/manuals/picoscope-4000-series-a-api-programmers-guide.pdf
 
+# To install the required picosdk package, see https://github.com/picotech/picosdk-python-wrappers. 
+# In summary simply copy the picosdk directory from the link above and run the setup.py file to install driver bindings
+
 import ctypes
 from math import floor, log2
 import sys
