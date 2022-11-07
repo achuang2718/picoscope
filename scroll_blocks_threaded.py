@@ -60,7 +60,7 @@ class PicoTrace(pg.GraphicsLayoutWidget):
         self.worker = PicoWorker()
         self.worker.moveToThread(self.thread)
         self.thread.started.connect(self.worker.pico_run)
-        self.worker.triggered.connect(lambda: self.curve.setData(data[:ptr]))
+        self.worker.triggered.connect(lambda: self.curve1.setData(data[:ptr]))
         self.thread.start()      
 
 app = QtGui.QApplication(sys.argv)

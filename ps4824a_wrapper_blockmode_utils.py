@@ -2,6 +2,9 @@
 # see also
 # https://www.picotech.com/download/manuals/picoscope-4000-series-a-api-programmers-guide.pdf
 
+# To install the required picosdk package, see https://github.com/picotech/picosdk-python-wrappers. 
+# In summary simply copy the picosdk directory from the link above and run the setup.py file to install driver bindings
+
 import ctypes
 from math import floor, log2
 import sys
@@ -14,17 +17,21 @@ from multiprocessing import Process
 
 
 class Picoscope:
-    def __init__(self, handle, verbose=False):
+    def __init__(self, handle, serial=None, verbose=False):
         """
         Args:
             - handle: unique int to identify each picoscope connected to the PC
+            - serial: 10-digit string typically found on the back of the device between two asterisks
         """
         self.verbose = verbose
         # Create c_handle and status ready for use
         self.c_handle = ctypes.c_int16(handle)
+        # If specifying a device to open by its serial number, need to convert serial number into byte array
+        if serial != None:
+            serial = ctypes.create_string_buffer(serial.encode('utf_8'))
         # Open PicoScope 4000 Series device
         # Returns handle to c_handle for use in future API functions
-        status = ps.ps4000aOpenUnit(ctypes.byref(self.c_handle), None)
+        status = ps.ps4000aOpenUnit(ctypes.byref(self.c_handle), serial)
         try:
             assert_pico_ok(status)
         except Exception as e:
